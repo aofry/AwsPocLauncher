@@ -44,7 +44,7 @@ public class MainActivity extends ActionBarActivity {
                         getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
                 if (networkInfo != null && networkInfo.isConnected()) {
-                    Log.w("com.hp.awspoclauncher", "Adi connected");
+                    Log.w("com.hp.awspoclauncher", "network connected");
 
                     new AsyncTask<String, Void, String>(){
 
@@ -58,13 +58,16 @@ public class MainActivity extends ActionBarActivity {
                         @Override
                         protected void onPostExecute(String result) {
                             //textView.setText(result);
-                            ((TextView)findViewById(R.id.displayData)).setText(result.substring(0, 200));
+                            if (result != null)
+                                ((TextView)findViewById(R.id.displayData)).setText(result.substring(0, 200));
+                            else
+                                Log.w("com.hp.awspoclauncher", "result is null");
                         }
                     }.execute("http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22GOOG%22)%0A%09%09&env=http%3A%2F%2Fdatatables.org%2Falltables.env&format=json");
                     //String res = getResponseFromUrl("http://google.com/");
 
                 } else {
-                    Log.w("com.hp.awspoclauncher", "Adi not connected");
+                    Log.w("com.hp.awspoclauncher", "no network available");
                 }
             }
         });
@@ -96,6 +99,7 @@ public class MainActivity extends ActionBarActivity {
         String xml = null;
         try {
             DefaultHttpClient httpClient = new DefaultHttpClient();
+
             HttpPost httpPost = new HttpPost(url);
             HttpResponse httpResponse = httpClient.execute(httpPost);
             HttpEntity httpEntity = httpResponse.getEntity();
