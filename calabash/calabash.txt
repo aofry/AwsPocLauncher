@@ -1,0 +1,16 @@
+https://github.com/calabash/calabash-android/wiki/Running-Calabash-Android
+
+keytool -genkey -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+
+#create project
+calabash-android gen
+
+#sign it with the configured keystore
+calabash-android resign app-debug-unaligned.apk
+
+calabash-android build app-debug-unaligned.apk 
+
+calabash-android run ../app/build/outputs/apk/app-debug-unaligned.apk
+
+Available steps:
+https://github.com/calabash/calabash-android/blob/master/ruby-gem/lib/calabash-android/canned_steps.md
