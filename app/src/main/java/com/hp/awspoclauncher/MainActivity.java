@@ -1,6 +1,7 @@
 package com.hp.awspoclauncher;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -31,6 +32,18 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getDataFromWebOnClick();
+
+        ((Button)findViewById(R.id.launchBtn)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.hp.awsaut");
+                startActivity(launchIntent);
+            }
+        });
+    }
+
+    private void getDataFromWebOnClick() {
         Button getDataBtn = (Button)findViewById(R.id.getDataBtn);
 
         getDataBtn.setOnClickListener(new View.OnClickListener() {
