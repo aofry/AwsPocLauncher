@@ -12,7 +12,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Click to get internet data"
+        android:text="ClickMe"
         android:id="@+id/getDataBtn"
         android:layout_below="@+id/displayData"
         android:layout_alignParentStart="true"
