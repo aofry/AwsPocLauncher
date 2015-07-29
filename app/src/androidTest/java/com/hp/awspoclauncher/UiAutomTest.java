@@ -9,8 +9,8 @@ import android.test.InstrumentationTestCase;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.By;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
+
 
 public class UiAutomTest extends InstrumentationTestCase {
 
@@ -35,8 +35,11 @@ public class UiAutomTest extends InstrumentationTestCase {
 
     @Test
     public void testTwoPlusThreeEqualsFive() throws UiObjectNotFoundException {
-        mDevice.findObject(new UiSelector()
-                .packageName("com.hp.awspoclauncher").resourceId(String.valueOf(R.id.getDataBtn))).click();
+        mDevice.findObject(new UiSelector().text("ClickMe"))
+                .click();
+        mDevice.findObject(new UiSelector().text("Launch AUT"))
+                .click();
+
 
     }
 }
