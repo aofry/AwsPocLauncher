@@ -49,5 +49,9 @@ android {
     }
 
 }
-
+task jar(type: Jar) {
+    //from android.sourceSets.main.java
+    from 'build/intermediates/classes/androidTest/debug/'
+    archiveName 'myapp-api.jar'
+}
 

@@ -7,6 +7,8 @@ import android.test.InstrumentationTestCase;
 
 import org.junit.*;
 
+import java.io.File;
+
 
 public class UiAutomTest extends InstrumentationTestCase {
 
@@ -40,6 +42,8 @@ public class UiAutomTest extends InstrumentationTestCase {
 
         assertTrue(displayTextField.getText().indexOf("GOOG") > 0);
 
+        //boolean screenshotRes = uiDevice.takeScreenshot(new File("/sdcard/home-screen-1234.png"), 1, 10);
+        //assertTrue(screenshotRes);
     }
 
     @Test

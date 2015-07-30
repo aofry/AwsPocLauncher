@@ -3,3 +3,4 @@
 * UIautomator internal android
 * stall test with AWS and stop somehow at the end
 * WS out
+*screen shoots
