@@ -31,8 +31,8 @@ public class UiAutomTest extends InstrumentationTestCase {
         uiDevice.wait(Until.hasObject(By.pkg("com.hp.awspoclauncher").depth(0)), 10000);
     }
 
-    @Test
-    public void testGetWebData() throws UiObjectNotFoundException {
+    //@Test
+    public void GetWebData() throws UiObjectNotFoundException {
         uiDevice.findObject(new UiSelector().text("ClickMe"))
                 .click();
         uiDevice.waitForIdle(5000);
@@ -51,5 +51,18 @@ public class UiAutomTest extends InstrumentationTestCase {
 
         uiDevice.findObject(new UiSelector().text("Launch AUT"))
                 .click();
+
+        uiDevice.waitForIdle(10000);
+
+        uiDevice.findObject(new UiSelector().text("presto"))
+                .click();
+
+        uiDevice.waitForIdle(5000);
+
+        UiObject displayTextField = uiDevice.findObject(new UiSelector().descriptionContains("autText"));
+
+
+        assertTrue(displayTextField.getText().indexOf("Clicked") >= 0);
+
     }
 }
