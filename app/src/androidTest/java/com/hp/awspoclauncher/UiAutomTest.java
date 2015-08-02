@@ -46,8 +46,8 @@ public class UiAutomTest extends InstrumentationTestCase {
         //assertTrue(screenshotRes);
     }
 
-    @Test
-    public void testLaunchAut() throws UiObjectNotFoundException {
+    //@Test
+    public void LaunchAut() throws UiObjectNotFoundException {
 
         uiDevice.findObject(new UiSelector().text("Launch AUT"))
                 .click();
@@ -62,7 +62,35 @@ public class UiAutomTest extends InstrumentationTestCase {
         UiObject displayTextField = uiDevice.findObject(new UiSelector().descriptionContains("autText"));
 
 
-        assertTrue(displayTextField.getText().indexOf("Clicked") >= 0);
+        assertTrue(displayTextField.getText().indexOf("1") >= 0);
+
+    }
+
+    @Test
+    public void testStalling() throws UiObjectNotFoundException {
+
+        uiDevice.findObject(new UiSelector().text("Launch AUT"))
+                .click();
+
+        uiDevice.waitForIdle(10000);
+
+        for (int i =1; i< 120; i++) {
+            uiDevice.findObject(new UiSelector().text("presto"))
+                    .click();
+
+            uiDevice.waitForIdle(5000);
+
+            UiObject displayTextField = uiDevice.findObject(new UiSelector().descriptionContains("autText"));
+
+
+            assertTrue(displayTextField.getText().indexOf(i + "") >= 0);
+
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 }
