@@ -8,11 +8,13 @@ import android.test.InstrumentationTestCase;
 import org.junit.*;
 
 import java.io.File;
+import java.util.Iterator;
 
 
-public class UiAutomTest extends InstrumentationTestCase {
+public class UiAutomTest extends UiAutomatorTestCase {
 
     private UiDevice uiDevice;
+    private String serverUrl;
 
     @Before
     public void setUp() {
@@ -29,6 +31,8 @@ public class UiAutomTest extends InstrumentationTestCase {
         // Clear out any previous instances
         context.startActivity(intent);
         uiDevice.wait(Until.hasObject(By.pkg("com.hp.awspoclauncher").depth(0)), 10000);
+
+        //this.serverUrl = getParams().getString("server");
     }
 
     //@Test
@@ -66,15 +70,15 @@ public class UiAutomTest extends InstrumentationTestCase {
 
     }
 
-    @Test
-    public void testStalling() throws UiObjectNotFoundException {
+    //@Test
+    public void Stalling() throws UiObjectNotFoundException {
 
         uiDevice.findObject(new UiSelector().text("Launch AUT"))
                 .click();
 
         uiDevice.waitForIdle(10000);
 
-        for (int i =1; i< 120; i++) {
+        for (int i =1; i< 12; i++) {
             uiDevice.findObject(new UiSelector().text("presto"))
                     .click();
 
@@ -91,6 +95,30 @@ public class UiAutomTest extends InstrumentationTestCase {
                 e.printStackTrace();
             }
         }
+
+    }
+
+    @Test
+    public void testParams() throws UiObjectNotFoundException {
+        //String stringValue = getParams().getString("stringKey");
+
+        //String stringValue = System.getProperties().propertyNames().nextElement().toString();
+        String stringValue = System.getProperty("prop");
+        System.out.println("got string: " + stringValue);
+        UiObject displayTextField = uiDevice.findObject(new UiSelector().descriptionContains("editMe"));
+
+        displayTextField.setText(stringValue);
+
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        stringValue = getParams().getString("prop");
+
+        displayTextField.setText(stringValue);
+
 
     }
 }
